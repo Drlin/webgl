@@ -22,25 +22,25 @@
 
 	<script>
     // 得到canvas element
-    let canvas = document.getElementById('canvas')
+    const canvas = document.getElementById('canvas')
 
     // 得到上下文对象 context
-    let ctx = canvas.getContext('webgl')
+    const ctx = canvas.getContext('webgl')
 
     //获得顶点着色器源代码,描述一个顶点的大小、位置（3d坐标）
-    let vertexShaderSource = document.getElementById('vertex').innerHTML
+    const vertexShaderSource = document.getElementById('vertex').innerHTML
 
     //获得片元着色器源代码,描述一个点的颜色
-    let fragmentShaderSource =  document.getElementById('fragment').innerHTML
+    const fragmentShaderSource =  document.getElementById('fragment').innerHTML
 
 
     // 可以把下面这段理解成范式代码，先不用深入理解为什么
 
     // 创建顶点着色器对象
-    let vertexShader = ctx.createShader(ctx.VERTEX_SHADER)
+    const vertexShader = ctx.createShader(ctx.VERTEX_SHADER)
 
     // 创建片元着色器对象
-    let fragmentShader = ctx.createShader(ctx.FRAGMENT_SHADER)
+    const fragmentShader = ctx.createShader(ctx.FRAGMENT_SHADER)
 
     // 把source 导入 着色器对象
     ctx.shaderSource(vertexShader, vertexShaderSource)
@@ -51,7 +51,7 @@
     ctx.compileShader(fragmentShader)
 
     // 创建 program
-    let program = ctx.createProgram()
+    const program = ctx.createProgram()
 
     // 把着色器附着在program上
     ctx.attachShader(program, vertexShader)

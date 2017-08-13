@@ -41,26 +41,22 @@
     // 获取变量位置
     const aposLocation = ctx.getAttribLocation(program, 'apos')
 
+		const origin = [500, 250]
 
-    // 根据位置对变量进行赋值
-    const x = 0.1
-    const y = 0.2
+    canvas.addEventListener('mousemove', (e) => {
+    	const v = new Float32Array([e.offsetX / origin[0] - 1, 1 - e.offsetY / origin[1]])
 
-    const v = new Float32Array([x, y])
+    	ctx.vertexAttrib2fv(aposLocation, v)
 
-    ctx.vertexAttrib2fv(aposLocation, v)
+	    ctx.clearColor(0.0, 0.0, 1.0, 1.0)
 
-    // const x = 0.1
-    // const y = 0.2
-    // ctx.vertexAttrib2f(aposLocation, x, y)
+    	// 设置背景色
+	    ctx.clear(ctx.COLOR_BUFFER_BIT)
 
-    ctx.clearColor(0.0, 0.0, 1.0, 1.0)
-
-    // 设置背景色
-    ctx.clear(ctx.COLOR_BUFFER_BIT)
-
-    //绘制一个点
-    ctx.drawArrays(ctx.POINTS, 0, 1)
+	    //绘制一个点
+    	ctx.drawArrays(ctx.POINTS, 0, 1)
+		})
+    
 	</script>
 </body>
 </html>
