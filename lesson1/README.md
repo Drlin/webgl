@@ -1,4 +1,4 @@
-###WebGL 开发通用步骤
+### WebGL 开发通用步骤
 - [x] 创建canvas标签
 - [x] 得到canvas元素
 - [x] 得到上下文对象

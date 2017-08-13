@@ -9,9 +9,10 @@
 	
 	<!-- 注意这里一定要有分号-->
 	<script type="shader" id="vertex">
+    attribute vec4 apos;
     void main(){
       gl_PointSize = 20.0;
-      gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+      gl_Position = apos;
     }
 	</script>
 	<script type="shader" id="fragment">
@@ -63,6 +64,14 @@
     // 使用program
     ctx.useProgram(program)
 
+    // 获取变量位置
+    const aposLocation = ctx.getAttribLocation(program, 'apos')
+
+
+    // 根据位置对变量进行赋值
+    const x = 0.1
+    const y = 0.2
+    ctx.vertexAttrib2f(aposLocation, x, y)
 
     ctx.clearColor(0.0, 0.0, 1.0, 1.0)
 

@@ -6,11 +6,13 @@ if (我不会js) {
 ```
 
 WebGL优秀的书籍
->  《WebGL入门指南》
->  《WebGL编程指南》
->  《WebGL高级编程》
+> * 《WebGL入门指南》
+> * 《WebGL编程指南》
+> * 《WebGL高级编程》
 
 
 ## 基础篇
 
-### 1.[绘制你的第一个程序](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-待办事宜-todo-列表)
+### 1.[绘制你的第一个程序](https://github.com/Drlin/webgl/tree/master/lesson1)
+
+### 2.[会动的点](https://github.com/Drlin/webgl/tree/master/lesson2)
