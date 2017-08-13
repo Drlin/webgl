@@ -24,37 +24,37 @@
   <script src="./lib.js"></script>
 
 	<script>
-    // 得到canvas element
-    const canvas = document.getElementById('canvas')
+		// 得到canvas element
+		const canvas = document.getElementById('canvas')
 
-    // 得到上下文对象 context
-    const ctx = canvas.getContext('webgl')
+		// 得到上下文对象 context
+		const ctx = canvas.getContext('webgl')
 
-    //获得顶点着色器源代码,描述一个顶点的大小、位置（3d坐标）
-    const vertexShaderSource = document.getElementById('vertex').innerHTML
+		//获得顶点着色器源代码,描述一个顶点的大小、位置（3d坐标）
+		const vertexShaderSource = document.getElementById('vertex').innerHTML
 
-    //获得片元着色器源代码,描述一个点的颜色
-    const fragmentShaderSource =  document.getElementById('fragment').innerHTML
+		//获得片元着色器源代码,描述一个点的颜色
+		const fragmentShaderSource =  document.getElementById('fragment').innerHTML
 
-    const program = createProgram(ctx, vertexShaderSource, fragmentShaderSource)
+		const program = createProgram(ctx, vertexShaderSource, fragmentShaderSource)
 
-    // 获取变量位置
-    const aposLocation = ctx.getAttribLocation(program, 'apos')
+		// 获取变量位置
+		const aposLocation = ctx.getAttribLocation(program, 'apos')
 
 		const origin = [500, 250]
 
-    canvas.addEventListener('mousemove', (e) => {
-    	const v = new Float32Array([e.offsetX / origin[0] - 1, 1 - e.offsetY / origin[1]])
+		canvas.addEventListener('mousemove', (e) => {
+			const v = new Float32Array([e.offsetX / origin[0] - 1, 1 - e.offsetY / origin[1]])
 
-    	ctx.vertexAttrib2fv(aposLocation, v)
+			ctx.vertexAttrib2fv(aposLocation, v)
 
-	    ctx.clearColor(0.0, 0.0, 1.0, 1.0)
+			ctx.clearColor(0.0, 0.0, 1.0, 1.0)
 
-    	// 设置背景色
-	    ctx.clear(ctx.COLOR_BUFFER_BIT)
+			// 设置背景色
+			ctx.clear(ctx.COLOR_BUFFER_BIT)
 
-	    //绘制一个点
-    	ctx.drawArrays(ctx.POINTS, 0, 1)
+			//绘制一个点
+			ctx.drawArrays(ctx.POINTS, 0, 1)
 		})
     
 	</script>
