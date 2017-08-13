@@ -16,3 +16,9 @@ WebGL优秀的书籍
 ### 1.[绘制你的第一个程序](https://github.com/Drlin/webgl/tree/master/lesson1)
 
 ### 2.[会动的点](https://github.com/Drlin/webgl/tree/master/lesson2)
+
+### 3.[会变色的点](https://github.com/Drlin/webgl/tree/master/lesson3)
+
+### 4.[绘制多个点](https://github.com/Drlin/webgl/tree/master/lesson4)
+
+### 5.[画一个圈](https://github.com/Drlin/webgl/tree/master/lesson5)

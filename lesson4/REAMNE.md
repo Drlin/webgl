@@ -7,7 +7,6 @@
 
 - [x] 定义数据
     ```
-    
     // 每一行定义一个点的位置信息
     const data = new Float32Array([
       0.1, 0.5,

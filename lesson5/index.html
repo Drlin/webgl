@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas width="500" height="500" id="canvas"></canvas>
+	
+	<!-- 注意这里一定要有分号-->
+	<script type="shader" id="vertex">
+    attribute vec4 apos;
+    void main(){
+      gl_PointSize = 20.0;
+      gl_Position = apos;
+    }
+	</script>
+	 <script type="shader" id="fragment">
+    precision lowp float;
+    uniform vec4 aColor;
+    void main(){
+      float r = distance(gl_FragCoord, vec2(.5, .5));
+      if (r > 0.5) {
+        discard;
+      } else {
+        gl_FragColor = aColor;
+      }
+    }
+	</script>
+
+  <script src="./lib.js"></script>
+
+	<script>
+    // 得到canvas element
+    const canvas = document.getElementById('canvas')
+
+    // 得到上下文对象 context
+    const ctx = canvas.getContext('webgl')
+
+    //获得顶点着色器源代码,描述一个顶点的大小、位置（3d坐标）
+    const vertexShaderSource = document.getElementById('vertex').innerHTML
+
+    //获得片元着色器源代码,描述一个点的颜色
+    const fragmentShaderSource =  document.getElementById('fragment').innerHTML
+
+    const program = createProgram(ctx, vertexShaderSource, fragmentShaderSource)
+
+    // 获取顶点着色器变量位置
+    const aposLocation = ctx.getAttribLocation(program, 'apos')
+    // 获取片元着色器变量位置
+    const aColorLocation = ctx.getUniformLocation(program, 'aColor')
+    // 获取缓冲区对象
+    const buffer = ctx.createBuffer()
+    //绑定buffer,规定用途 
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, buffer)
+
+    const data = new Float32Array([
+      0.1, 0.5,
+      0.4, 0.0,
+      0.3, 0.4
+    ])
+
+    ctx.bufferData(ctx.ARRAY_BUFFER, data, ctx.STATIC_DRAW)
+    ctx.vertexAttribPointer(aposLocation, 2, ctx.FLOAT, false, 0, 0)
+    ctx.enableVertexAttribArray(aposLocation)
+
+    //对片元着色器赋值
+    ctx.uniform4f(aColorLocation, 0.0, 1.0, 0.0, 1.0)
+
+    ctx.clearColor(0.0, 0.0, 1.0, 1.0)
+
+    // 设置背景色
+    ctx.clear(ctx.COLOR_BUFFER_BIT)
+
+    //绘制三个点
+    ctx.drawArrays(ctx.POINTS, 0, 3)
+	</script>
+</body>
+</html>
