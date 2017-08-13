@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas width="500" height="500" id="canvas"></canvas>
+	
+	<!-- 注意这里一定要有分号-->
+	<script type="shader" id="vertex">
+    void main(){
+      gl_PointSize = 20.0;
+      gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+	</script>
+	<script type="shader" id="fragment">
+    void main(){
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+	</script>
+
+	<script>
+	 	// 得到canvas element
+		let canvas = document.getElementById('canvas')
+
+		// 得到上下文对象 context
+		let ctx = canvas.getContext('webgl')
+
+		//获得顶点着色器源代码,描述一个顶点的大小、位置（3d坐标）
+		let vertexShaderSource = document.getElementById('vertex').innerHTML
+
+		//获得片元着色器源代码,描述一个点的颜色
+		let fragmentShaderSource =  document.getElementById('fragment').innerHTML
+
+
+		// 可以把下面这段理解成范式代码，先不用深入理解为什么
+
+		// 创建顶点着色器对象
+    let vertexShader = ctx.createShader(ctx.VERTEX_SHADER)
+
+		// 创建片元着色器对象
+    let fragmentShader = ctx.createShader(ctx.FRAGMENT_SHADER)
+
+    // 把source 导入 着色器对象
+    ctx.shaderSource(vertexShader, vertexShaderSource)
+    ctx.shaderSource(fragmentShader, fragmentShaderSource)
+
+    // 对着色器对象进行编译 compile
+    ctx.compileShader(vertexShader)
+    ctx.compileShader(fragmentShader)
+
+    // 创建 program
+    let program = ctx.createProgram()
+
+    // 把着色器附着在program上
+    ctx.attachShader(program, vertexShader)
+    ctx.attachShader(program, fragmentShader)
+
+		// 链接program
+    ctx.linkProgram(program)
+
+		// 使用program
+    ctx.useProgram(program)
+
+
+
+
+    ctx.clearColor(0.0, 0.0, 1.0, 1.0)
+
+    // 设置背景色
+    ctx.clear(ctx.COLOR_BUFFER_BIT)
+
+    //绘制一个点
+    ctx.drawArrays(ctx.POINTS, 0, 1)
+	</script>
+</body>
+</html>
